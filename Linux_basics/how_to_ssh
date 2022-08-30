@@ -1,0 +1,27 @@
+# Before you begin, make sure 2 servers(master and slave) are up and running
+
+# first step is to set a passwd for the signed user(centos in this example)
+
+	1) run the command <sudo passwd centos> and set the passwd
+
+# Generate the ssh keys on the master server
+
+	2) run the command <sudo ssh-keygen -t rsa>
+
+# After that, go to the slave server where you need to change the config file. In order to enable the authorication via ssh tunnel
+
+	3) sudo vi /etc/ssh/sshd_config
+	uncomment #PasswordAuthentication yes and make sure it is set to "Yes"
+
+# Then restart the sshd service
+
+	4) restart systemctl restart sshd 
+
+# Now copy the keys from your master server to slave server
+
+	5) sudo ssh-copy-id centos@ip address
+
+# Finally, you can ssh from the master to slave server
+
+	6) sudo ssh centos@ip address
+
