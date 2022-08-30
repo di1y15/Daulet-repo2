@@ -1,0 +1,32 @@
+# These are the steps to partition the disk on AWS and create LVM
+
+	1) Create an EC2_instance on AWS, power it off and navigate to EBS. Create a new EBS (Elastic Block Volume) and attach it to the instance. 
+
+	2) Open terminal and run <sudo yum install lvm2> if it is not installed
+	
+	3) To view all the block devices and partitions available on the system, run the command <sudo df -h>
+
+	4) Run fdisk /dev/xvdf (example) 
+		
+		a) choose "m"
+		b) to create a partition, choose "n"
+		c) Choose type of partition (primary or extended) 
+		d) Then it will ask you for partition number: press Enter
+		e) Last sector will ask you for the space
+		f) partition is created. Press "w" to save and exit
+
+	5) Run <lsblk> to confirm. If it does not show up, run <partprobe> to update partition table
+ 
+   	6) To create physical volume, run <sudo pvcreate /dev/xvdf> and check it with <pvs>
+
+	7) To create Volume group, run <sudo vgcreate Nameofthegroup /dev/xvdf> and check it with <vgs>
+
+	8) To create Logical Volume, run <sudo lvcreate -n Nameofthevolume -L +size GB Nameofthegroup> and check it with <lvs>
+
+  	9) Create a file system, so the data can be written on the partition. Run <sudo mkfs.xfs /dev/NameoftheGroup/NameoftheVolume> and check it with <lsblk or blkid>
+	
+	10) Create a mount point and Mount Partition there by running the command <sudo mount /dev/xvdf /mnt> and check it with <lsblk or blkid>
+
+	11) Last step is to make it boot persistent. Run <sudo vi /etc/fstab> and add the full path of the logical volume, mount point, file system, defaults, 0 0
+
+# LVM is ready for use 
