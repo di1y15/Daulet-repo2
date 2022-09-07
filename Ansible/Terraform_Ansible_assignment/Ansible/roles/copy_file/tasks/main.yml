@@ -1,0 +1,7 @@
+- name: copying file from master to slave servers
+  copy:
+    src: /etc/ansible/filetocopy
+    dest: /root/filetocopy
+    owner: root
+    group: root
+    mode: '0644'

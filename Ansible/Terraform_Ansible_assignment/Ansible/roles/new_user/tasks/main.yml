@@ -1,0 +1,4 @@
+- name: creating a new user
+  user:
+    name: newuser
+    group: root

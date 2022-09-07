@@ -1,0 +1,43 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: install nfs-utils
+      yum:
+        name: nfs-utils
+        state: latest
+    - name: starting nfs and making it boot persistent
+      service:
+        name: nfs-utils
+        state: started
+        enabled: yes
+- hosts: Dbservers
+  become: true
+  tasks:
+    - name: copying file from master to slave servers
+      copy:
+        src: /etc/ansible/filetocopy
+        dest: /root/filetocopy
+        owner: root
+        group: root
+        mode: '0644'
+    - name: creating a new user
+      user:
+        name: newuser
+        group: root
+- hosts: Testservers
+  become: true
+  tasks:
+    - name: patch a server and automate it using cron
+      cron:
+        name: "update a server"
+        minute: "0"
+        hour: "7"
+        job: "yum update all"
+    - name:
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^ServerAdmin'
+        line: ServerAdmin example@example.com
+
+

@@ -1,0 +1,6 @@
+- name: patch a server and automate it using cron
+  cron:
+    name: "update a server"
+    minute: "0"
+    hour: "7"
+    job: "yum update all"

@@ -1,0 +1,5 @@
+- name: starting nfs and making it boot persistent
+  service:
+    name: nfs-utils
+    state: started
+    enabled: yes

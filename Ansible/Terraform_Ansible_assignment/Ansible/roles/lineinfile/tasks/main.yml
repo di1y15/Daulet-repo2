@@ -1,0 +1,5 @@
+ - name:
+   lineinfile:
+     path: /etc/httpd/conf/httpd.conf
+     regexp: '^ServerAdmin'
+     line: ServerAdmin example@example.com

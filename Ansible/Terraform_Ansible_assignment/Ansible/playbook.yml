@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  become: true
+  roles:
+    - nfs_install
+    - service_nfs 
+  
+- hosts: Dbservers
+  become: true
+  roles:
+    - copy_file
+    - new_user
+
+- hosts: Testservers
+  become: true
+  roles:
+    - cron
+    - lineinfile
