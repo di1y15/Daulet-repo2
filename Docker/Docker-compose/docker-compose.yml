@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  study-group:
+    build: /Users/dauletilyassov/Documents/Dockercompose
+    environment:
+      - DOCKER_BUILDKIT=0
+    volumes: 
+      - /Users/dauletilyassov/Documents/Dockercompose:/Users/dauletilyassov/Documents/Dockercompose
+    ports: 
+      - 5001:80
+  website:
+    image: php:apache
+    volumes:
+      - /Users/dauletilyassov/Documents/Dockercompose:/Users/dauletilyassov/Documents/Dockercompose
+    ports:
+      - 5000:80
+    depends_on:
+      - study-group
+
