@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> JSON Sandbox</title>
+    </head>
+    <body>
+        <ul id="people"></ul>
+        <script>
+            /*
+            var person = {
+                name: "Daulet",
+                age: 29,
+                country: "Kazakhstan",
+                address:{
+                    street:"5 Bulvarnoi, 29",
+                    city:"Taraz"
+                },
+                children:["Aidyn", "Aidana"]
+                
+            }
+            //person = JSON.stringify(person);
+            //person = JSON.parse(person);
+
+            var people = [
+                {
+                    name:"Daulet",
+                    age:"30",
+
+                },
+                {
+                    name:"Aidana",
+                    age:"33"
+                },
+                {
+                    name:"Aidyn",
+                    age:"24"
+                }
+            ]
+
+            //console.log(people);
+            var output='';
+            for (var i = 0;i < people.length;i++){
+                //console.log(people[i])
+                output += '<li>'+people[i].name+'</li>';
+            }
+            document.getElementsById('people').innerHTML = output;
+            */
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(xhttp.responseText);
+                    var people = response.people;
+
+                    var output='';
+                    for (var i = 0;i < people.length;i++){
+                        
+                        output += '<li>'+people[i].name+'</li>';
+                        output += '<li>'+people[i].age+'</li>';
+                    }
+                    document.getElementById('people').innerHTML = output;
+
+                }
+            };
+            xhttp.open("GET", "people.json", true);
+            xhttp.send();
+    
+        </script>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+{
+    "people": [
+    {
+        "name":"Daulet",
+        "age":"30"
+
+    },
+    {
+        "name":"Aidana",
+        "age":"33"
+    },
+    {
+        "name":"Aidyn",
+        "age":"24"
+    },
+    {
+        "name":"Akbope",
+        "age":"55"
+    },
+    {
+        "name":"Nurlan",
+        "age":"59"
+    }
+    ]
+}
